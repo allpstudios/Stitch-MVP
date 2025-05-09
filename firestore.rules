@@ -1,0 +1,324 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isParticipant(conversationId) {
+      let conv = get(/databases/$(database)/documents/conversations/$(conversationId));
+      return conv != null && (
+        request.auth.uid == conv.data.brandId || 
+        request.auth.uid == conv.data.vendorId ||
+        request.auth.uid in conv.data.participantIds
+      );
+    }
+
+    function isAdmin() {
+      let user = get(/databases/$(database)/documents/users/$(request.auth.uid));
+      return user != null && user.data.isAdmin == true;
+    }
+
+    function isUserDoc(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function isBrand() {
+      return exists(/databases/$(database)/documents/brands/$(request.auth.uid));
+    }
+
+    function isVendor() {
+      return exists(/databases/$(database)/documents/vendors/$(request.auth.uid));
+    }
+
+    // Products collection
+    match /products/{productId} {
+      allow read: if true;
+      allow create: if isAuthenticated() && isVendor();
+      allow update, delete: if isAuthenticated() && (
+        resource.data.vendorId == request.auth.uid ||
+        isAdmin()
+      );
+    }
+
+    // Archived collections - NEW
+    match /archived_quotes/{quoteId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    match /archived_orders/{orderId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    match /archived_files/{fileId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    match /archived_messages/{messageId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // Tasks collection under vendors
+    match /vendors/{vendorId}/tasks/{taskId} {
+      allow read: if isAuthenticated() && request.auth.uid == vendorId;
+      allow create: if isAuthenticated() && request.auth.uid == vendorId;
+      allow update: if isAuthenticated() && request.auth.uid == vendorId;
+      allow delete: if isAuthenticated() && request.auth.uid == vendorId;
+    }
+
+    // Tasks collection under brands
+    match /brands/{brandId}/tasks/{taskId} {
+      allow read: if isAuthenticated() && request.auth.uid == brandId;
+      allow create: if isAuthenticated() && request.auth.uid == brandId;
+      allow update: if isAuthenticated() && request.auth.uid == brandId;
+      allow delete: if isAuthenticated() && request.auth.uid == brandId;
+    }
+
+    // Events collection under vendors
+    match /vendors/{vendorId}/events/{eventId} {
+      allow read: if isAuthenticated() && request.auth.uid == vendorId;
+      allow create: if isAuthenticated() && request.auth.uid == vendorId;
+      allow update: if isAuthenticated() && request.auth.uid == vendorId;
+      allow delete: if isAuthenticated() && request.auth.uid == vendorId;
+    }
+
+    // Events collection under brands
+    match /brands/{brandId}/events/{eventId} {
+      allow read: if isAuthenticated() && request.auth.uid == brandId;
+      allow create: if isAuthenticated() && request.auth.uid == brandId;
+      allow update: if isAuthenticated() && request.auth.uid == brandId;
+      allow delete: if isAuthenticated() && request.auth.uid == brandId;
+    }
+
+    // AI Chat History collection
+    match /aiChatHistory/{chatId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && request.auth.uid == resource.data.userId;
+      allow delete: if isAuthenticated() && request.auth.uid == resource.data.userId;
+    }
+
+    // Messages collection [UPDATED to allow archiving]
+    match /messages/{messageId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && (
+        resource.data.senderId == request.auth.uid ||
+        isParticipant(resource.data.conversationId) ||
+        isAdmin()
+      );
+      allow delete: if isAuthenticated() && (
+        resource.data.senderId == request.auth.uid ||
+        isParticipant(resource.data.conversationId) ||
+        isAdmin()
+      );
+    }
+
+    // Quote Requests collection
+    match /quoteRequests/{quoteId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && (
+        isBrand() ||
+        isVendor()
+      );
+      allow update: if isAuthenticated() && (
+        resource.data.brandId == request.auth.uid ||
+        resource.data.vendorId == request.auth.uid ||
+        isAdmin()
+      );
+    }
+
+    // Quotes collection
+    match /quotes/{quoteId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && (
+        resource.data.vendorId == request.auth.uid ||
+        resource.data.brandId == request.auth.uid ||
+        isAdmin()
+      );
+      allow delete: if isAuthenticated() && isAdmin();
+    }
+
+    // Orders collection
+    match /orders/{orderId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && (
+        resource.data.vendorId == request.auth.uid ||
+        resource.data.brandId == request.auth.uid ||
+        isAdmin()
+      );
+      allow delete: if isAuthenticated() && (
+        resource.data.vendorId == request.auth.uid ||
+        resource.data.brandId == request.auth.uid ||
+        isAdmin()
+      );
+
+      // Events subcollection
+      match /events/{eventId} {
+        allow read: if isAuthenticated();
+        allow create: if isAuthenticated() && (
+          get(/databases/$(database)/documents/orders/$(orderId)).data.vendorId == request.auth.uid ||
+          get(/databases/$(database)/documents/orders/$(orderId)).data.brandId == request.auth.uid ||
+          isAdmin()
+        );
+        allow update: if isAuthenticated() && (
+          resource.data.createdBy == request.auth.uid ||
+          get(/databases/$(database)/documents/orders/$(orderId)).data.vendorId == request.auth.uid ||
+          get(/databases/$(database)/documents/orders/$(orderId)).data.brandId == request.auth.uid ||
+          isAdmin()
+        );
+        allow delete: if isAuthenticated() && isAdmin();
+      }
+    }
+
+    // Order Templates collection
+    match /orderTemplates/{templateId} {
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Inventory collection
+    match /inventory/{itemId} {
+      allow read: if isAuthenticated() && resource.data.vendorId == request.auth.uid;
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && resource.data.vendorId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.vendorId == request.auth.uid;
+    }
+    
+    // Inventory History collection
+    match /inventoryHistory/{historyId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update: if false;
+      allow delete: if isAuthenticated() && isAdmin();
+    }
+    
+    // Inventory Reservations collection
+    match /inventoryReservations/{reservationId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated();
+      allow delete: if isAuthenticated() && isAdmin();
+    }
+    
+    // Shipping Labels collection
+    match /shippingLabels/{labelId} {
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+    
+    // Analytics Reports collection
+    match /analyticsReports/{reportId} {
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Conversations collection
+    match /conversations/{conversationId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && (
+        request.auth.uid == resource.data.brandId ||
+        request.auth.uid == resource.data.vendorId ||
+        request.auth.uid in resource.data.participantIds
+      );
+      allow delete: if isAuthenticated() && (
+        request.auth.uid == resource.data.brandId ||
+        request.auth.uid == resource.data.vendorId ||
+        request.auth.uid in resource.data.participantIds ||
+        isAdmin()
+      );
+
+      // Messages subcollection [NEW]
+      match /messages/{messageId} {
+        allow read: if isAuthenticated() && isParticipant(conversationId);
+        allow create: if isAuthenticated() && isParticipant(conversationId);
+        allow update: if isAuthenticated() && (
+          resource.data.senderId == request.auth.uid ||
+          isParticipant(conversationId)
+        );
+        allow delete: if isAuthenticated() && (
+          resource.data.senderId == request.auth.uid ||
+          isParticipant(conversationId) ||
+          isAdmin()
+        );
+      }
+    }
+
+    // Vendors collection
+    match /vendors/{vendorId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && (
+        request.auth.uid == vendorId ||
+        isAdmin()
+      );
+      allow delete: if isAuthenticated() && isAdmin();
+      
+      // Allow vendors to manage their own tasks
+      match /tasks/{taskId} {
+        allow read, write: if isAuthenticated() && request.auth.uid == vendorId;
+      }
+      
+      // Allow vendors to manage their own events
+      match /events/{eventId} {
+        allow read, write: if isAuthenticated() && request.auth.uid == vendorId;
+      }
+    }
+    
+    // Brands collection
+    match /brands/{brandId} {
+      allow read: if true;
+      allow write: if isAuthenticated() && (
+        request.auth.uid == brandId ||
+        isAdmin()
+      );
+      
+      // Allow brands to manage their own tasks
+      match /tasks/{taskId} {
+        allow read, write: if isAuthenticated() && request.auth.uid == brandId;
+      }
+      
+      // Allow brands to manage their own events
+      match /events/{eventId} {
+        allow read, write: if isAuthenticated() && request.auth.uid == brandId;
+      }
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (
+        request.auth.uid == userId ||
+        isAdmin()
+      );
+    }
+
+    // Unread status subcollection
+    match /conversations/{conversationId}/unread/{userId} {
+      allow read, write: if isAuthenticated() && (
+        request.auth.uid == userId ||
+        isParticipant(conversationId)
+      );
+    }
+
+    // Files subcollection in messages
+    match /messages/{messageId}/files/{fileId} {
+      allow read: if isAuthenticated() && (
+        isParticipant(get(/databases/$(database)/documents/messages/$(messageId)).data.conversationId)
+      );
+      allow write: if isAuthenticated() && (
+        request.auth.uid == get(/databases/$(database)/documents/messages/$(messageId)).data.senderId
+      );
+    }
+  }
+} 

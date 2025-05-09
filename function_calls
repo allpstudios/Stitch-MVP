@@ -1,0 +1,107 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { FaSearch, FaFile, FaPaperclip, FaDownload, FaThumbsUp, FaThumbsDown, FaQuestion } from 'react-icons/fa';
+import './Messages.css';
+import { db } from '../firebase';
+import { collection, query, where, orderBy, onSnapshot, addDoc, serverTimestamp, updateDoc, doc, getDocs, writeBatch, arrayUnion, arrayRemove, getDoc, increment, deleteDoc } from 'firebase/firestore';
+import { useAuth } from '../context/AuthContext';
+import QuoteDetailsModal from '../components/QuoteDetailsModal';
+import { getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
+import MessageItem from '../components/MessageItem';
+
+const Messages = ({ initialChatId, openThread }) => {
+  const { user, userProfile } = useAuth();
+  const [activeChat, setActiveChat] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [conversations, setConversations] = useState([]);
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [selectedQuote, setSelectedQuote] = useState(null);
+  const [unreadCounts, setUnreadCounts] = useState({});
+  const messagesEndRef = useRef(null);
+  const messageInputRef = useRef(null);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Effect to handle initial chat setup
+  useEffect(() => {
+    console.log('Messages component received:', { initialChatId, openThread });
+    if (initialChatId && openThread && !isInitialized) {
+      console.log('Setting active chat:', initialChatId);
+      setActiveChat(initialChatId);
+      setIsInitialized(true);
+      
+      // Focus the message input
+      setTimeout(() => {
+        messageInputRef.current?.focus();
+      }, 100);
+    }
+  }, [initialChatId, openThread, isInitialized]);
+
+  // Effect to fetch conversations
+  useEffect(() => {
+    if (!user) return;
+
+    const q = query(
+      collection(db, 'conversations'),
+      where('participants', 'array-contains', user.uid),
+      orderBy('lastMessageAt', 'desc')
+    );
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const conversationList = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setConversations(conversationList);
+      
+      // If we have an initialChatId, make sure it's loaded
+      if (initialChatId && openThread) {
+        const conversation = conversationList.find(c => c.id === initialChatId);
+        if (conversation) {
+          handleConversationClick(initialChatId);
+        }
+      }
+    });
+
+    return () => unsubscribe();
+  }, [user, initialChatId, openThread]);
+
+  // ... rest of your existing code ...
+
+  return (
+    <div className="messages-container">
+      <div className="conversations-list">
+        {/* ... existing conversations list ... */}
+      </div>
+
+      <div className="chat-area">
+        {activeChat ? (
+          <>
+            {/* ... existing chat header ... */}
+            <div className="messages-list">
+              {messages.map(message => renderMessage(message))}
+              <div ref={messagesEndRef} />
+            </div>
+
+            <div className="message-input">
+              <input
+                ref={messageInputRef}
+                type="text"
+                placeholder="Type a message..."
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+              />
+              {/* ... rest of message input ... */}
+            </div>
+          </>
+        ) : (
+          <div className="no-chat-selected">
+            <h3>Select a conversation to start messaging</h3>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Messages; 

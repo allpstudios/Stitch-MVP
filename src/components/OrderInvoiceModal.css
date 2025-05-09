@@ -1,0 +1,393 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 800px;
+  overflow: hidden;
+}
+
+.modal-header {
+  width: 100%;
+  background: linear-gradient(45deg, #FF69B4, #9B5DE5);
+  padding: 20px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.modal-content {
+  padding: 32px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.info-section h3 {
+  margin: 0 0 16px 0;
+  color: #333;
+  font-size: 1rem;
+}
+
+.info-section p {
+  margin: 8px 0;
+  color: #666;
+}
+
+.invoice-modal {
+  background: white;
+  border-radius: 16px;
+  width: 600px;
+  max-width: 90vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 0;
+}
+
+.invoice-header {
+  background: linear-gradient(45deg, #FF69B4, #9B5DE5);
+  padding: 24px;
+  border-radius: 16px 16px 0 0;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoice-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.invoice-content {
+  padding: 24px;
+}
+
+.info-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.info-box {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.info-box h3 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.info-label {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.info-value {
+  color: #333;
+  font-weight: 500;
+}
+
+.items-section {
+  margin: 24px 0;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.items-table th {
+  text-align: left;
+  padding: 12px;
+  color: #666;
+  font-weight: 500;
+  border-bottom: 1px solid #eee;
+}
+
+.items-table td {
+  padding: 12px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+.items-table tr:last-child td {
+  border-bottom: none;
+}
+
+.quantity-col {
+  text-align: center;
+}
+
+.rate-col, .amount-col {
+  text-align: right;
+}
+
+.totals-section {
+  margin-top: 24px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  color: #666;
+}
+
+.total-row.final {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 2px solid #eee;
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.invoice-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.payment-status {
+  flex: 1;
+}
+
+.paid-stamp {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 2px solid #1e8e3e;
+  border-radius: 8px;
+  color: #1e8e3e;
+  transform: rotate(-15deg);
+}
+
+.paid-text {
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 0.5rem;
+}
+
+.paid-date {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.invoice-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.pay-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pay-button svg {
+  font-size: 16px;
+}
+
+.edit-button {
+  background: linear-gradient(45deg, #9B5DE5, #FF69B4);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(155, 93, 229, 0.2);
+}
+
+.edit-button svg {
+  font-size: 16px;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background: white;
+}
+
+.edit-input:focus {
+  border-color: #FF69B4;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 105, 180, 0.1);
+}
+
+.edit-input.quantity {
+  width: 80px;
+  text-align: center;
+}
+
+.edit-input.rate {
+  width: 100px;
+  text-align: right;
+}
+
+.add-item-btn {
+  margin-top: 16px;
+  padding: 8px 16px;
+  background: #f8f9fa;
+  border: 1px dashed #ddd;
+  border-radius: 8px;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.add-item-btn:hover {
+  background: #eee;
+  border-color: #ccc;
+}
+
+.remove-item-btn {
+  background: none;
+  border: none;
+  color: #ff4444;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  padding: 4px;
+}
+
+.remove-item-btn:hover {
+  opacity: 1;
+}
+
+.save-button {
+  background: linear-gradient(45deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.save-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+.save-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.action-col {
+  width: 40px;
+  text-align: center;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.payment-container {
+  padding: 32px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.payment-container h3 {
+  margin: 0 0 24px 0;
+  color: #333;
+  text-align: center;
+}
+
+/* Update modal content for payment view */
+.modal-content.payment-view {
+  max-width: 550px;
+}
+
+/* Ensure the Stripe Elements iframe has proper spacing */
+.payment-container .StripeElement {
+  margin: 16px 0;
+} 

@@ -1,0 +1,30 @@
+.size-breakdown {
+  margin-top: 16px;
+}
+
+.sizes-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.size-input {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.size-input label {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+.size-input input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+} 

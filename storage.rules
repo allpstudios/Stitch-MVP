@@ -1,0 +1,158 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function isParticipant(conversationId) {
+      return request.auth != null && 
+        exists(/databases/$(database)/documents/conversations/$(conversationId)/participants/$(request.auth.uid));
+    }
+
+    // Base rules - allow authenticated users to read all files
+    match /{allPaths=**} {
+      allow read: if isAuthenticated();
+    }
+    
+    // Rules for brand logos with delete permission
+    match /brands/{brandId}/logo/{fileName} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated() && isOwner(brandId) && (
+        // File size limit
+        request.resource.size < 5 * 1024 * 1024 && // 5MB
+        // Only allow image files
+        request.resource.contentType.matches('image/.*')
+      );
+      allow delete: if isAuthenticated() && isOwner(brandId);
+    }
+
+    // Rules for vendor logos with delete permission
+    match /vendors/{vendorId}/logo/{fileName} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated() && isOwner(vendorId) && (
+        // File size limit
+        request.resource.size < 5 * 1024 * 1024 && // 5MB
+        // Only allow image files
+        request.resource.contentType.matches('image/.*')
+      );
+      allow delete: if isAuthenticated() && isOwner(vendorId);
+    }
+    
+    // Rules for vendor service images
+    match /vendors/{vendorId}/services/{fileName} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated() && isOwner(vendorId) && (
+        // File size limit
+        request.resource.size < 5 * 1024 * 1024 && // 5MB
+        // Only allow image files
+        request.resource.contentType.matches('image/.*')
+      );
+      allow delete: if isAuthenticated() && isOwner(vendorId);
+    }
+    
+    // Rules for vendor portfolio images
+    match /vendors/{vendorId}/portfolio/{fileName} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated() && isOwner(vendorId) && (
+        // File size limit
+        request.resource.size < 10 * 1024 * 1024 && // 10MB
+        // Only allow image files
+        request.resource.contentType.matches('image/.*')
+      );
+      allow delete: if isAuthenticated() && isOwner(vendorId);
+    }
+    
+    // Rules for vendor gallery images
+    match /vendors/{vendorId}/gallery/{fileName} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated() && isOwner(vendorId) && (
+        // File size limit
+        request.resource.size < 10 * 1024 * 1024 && // 10MB
+        // Only allow image files
+        request.resource.contentType.matches('image/.*')
+      );
+      allow delete: if isAuthenticated() && isOwner(vendorId);
+    }
+    
+    // Rules for vendor client logos
+    match /vendors/{vendorId}/clients/{fileName} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated() && isOwner(vendorId) && (
+        // File size limit
+        request.resource.size < 5 * 1024 * 1024 && // 5MB
+        // Only allow image files
+        request.resource.contentType.matches('image/.*')
+      );
+      allow delete: if isAuthenticated() && isOwner(vendorId);
+    }
+    
+    // Updated Quotes folder rules
+    match /quotes/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (
+        // File size limit
+        request.resource.size < 10 * 1024 * 1024 && // 10MB
+        // File type validation for quotes
+        (
+          request.resource.contentType.matches('image/.*') ||
+          request.resource.contentType.matches('application/pdf') ||
+          request.resource.contentType.matches('application/postscript') ||
+          request.resource.contentType.matches('application/illustrator') ||
+          request.resource.contentType.matches('application/vnd.adobe.photoshop') ||
+          request.resource.contentType.matches('application/x-photoshop') ||
+          request.resource.contentType.matches('application/octet-stream')
+        )
+      );
+    }
+
+    // Legacy quotes folder structure (keeping for backward compatibility)
+    match /quotes/{userId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && isOwner(userId);
+    }
+
+    // Rules for messages folder
+    match /messages/{conversationId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (
+        // File size limit
+        request.resource.size < 10 * 1024 * 1024 && // 10MB
+        // File type validation for messages
+        (
+          request.resource.contentType.matches('image/.*') ||
+          request.resource.contentType.matches('application/pdf') ||
+          request.resource.contentType.matches('application/.*zip') ||
+          request.resource.contentType.matches('application/x-zip.*')
+        )
+      );
+    }
+
+    // Rules for profile pictures
+    match /profilePictures/{userId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && isOwner(userId) && (
+        // File size limit for profile pictures
+        request.resource.size < 5 * 1024 * 1024 && // 5MB
+        // Only allow image files
+        request.resource.contentType.matches('image/.*')
+      );
+    }
+
+    // Rules for portfolio images
+    match /portfolio/{userId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && isOwner(userId) && (
+        // File size limit
+        request.resource.size < 10 * 1024 * 1024 && // 10MB
+        // Only allow image files
+        request.resource.contentType.matches('image/.*')
+      );
+    }
+  }
+} 

@@ -1,0 +1,49 @@
+.payment-form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.payment-button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(45deg, #FF69B4, #9B5DE5);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.payment-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.payment-button:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.error-message {
+  color: #df1b41;
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Stripe Element wrapper */
+.StripeElement {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 12px;
+  background: white;
+  margin-bottom: 16px;
+}
+
+.StripeElement--focus {
+  border-color: #FF69B4;
+  box-shadow: 0 0 0 1px #FF69B4;
+} 

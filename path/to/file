@@ -1,0 +1,6 @@
+function handleLogin() {
+    const user = validateUser();
+    if (user) {
+        startSession(user);
+    }
+} 

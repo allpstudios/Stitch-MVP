@@ -1,0 +1,33 @@
+.custom-marker {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.custom-marker:hover {
+  transform: scale(1.1);
+}
+
+.info-window {
+  padding: 10px;
+  min-width: 200px;
+}
+
+.info-window h3 {
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+.info-window p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.map-error {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: #ff4444;
+  margin: 20px;
+} 

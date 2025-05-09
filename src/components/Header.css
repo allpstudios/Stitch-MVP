@@ -1,0 +1,106 @@
+.messages-link {
+  position: relative;
+}
+
+/* Add hover effect for messages link when there are notifications */
+.messages-link:has(.notification-badge) {
+  animation: shake 1s ease infinite;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+}
+
+.nav-icons {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-icon {
+  color: white;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-icon:hover {
+  color: #FF69B4;
+  transform: scale(1.1);
+}
+
+.messages-icon {
+  position: relative;
+}
+
+.header {
+  background: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+
+.login-btn {
+  padding: 0.5rem 1rem;
+  background: #FF69B4;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.login-btn:hover {
+  background: #ff4da6;
+  transform: translateY(-1px);
+}
+
+.utility-icon.cart-icon {
+  color: blue;
+} 
+
+.header-logo {
+  height: 30px; /* Adjust this to match your current logo size */
+  width: auto;
+} 

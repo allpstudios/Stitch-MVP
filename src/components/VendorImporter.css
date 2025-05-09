@@ -1,0 +1,112 @@
+.vendor-importer {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.vendor-importer h2 {
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.template-section,
+.upload-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.template-section h3,
+.upload-section h3 {
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+.download-btn,
+.import-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.download-btn {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.download-btn:hover {
+  background-color: #dee2e6;
+}
+
+.import-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.import-btn:hover {
+  background-color: #0056b3;
+}
+
+.import-btn:disabled {
+  background-color: #b3d7ff;
+  cursor: not-allowed;
+}
+
+.file-input {
+  display: block;
+  margin: 1rem 0;
+  padding: 1rem;
+  width: 100%;
+  border: 2px dashed #dee2e6;
+  border-radius: 4px;
+  background: white;
+}
+
+.error-message {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: #fff3f3;
+  border: 1px solid #ffcdd2;
+  border-radius: 4px;
+  color: #d32f2f;
+}
+
+.results-section {
+  margin-top: 2rem;
+}
+
+.successful-imports,
+.failed-imports {
+  margin-top: 1.5rem;
+}
+
+.result-item {
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.result-item.success {
+  background-color: #f1f8f1;
+  border: 1px solid #c8e6c9;
+}
+
+.result-item.error {
+  background-color: #fff3f3;
+  border: 1px solid #ffcdd2;
+}
+
+.result-item p {
+  margin: 0.5rem 0;
+}
+
+.result-item strong {
+  color: #333;
+} 

@@ -1,0 +1,63 @@
+/* CommandHandler.css */
+/* This file contains styles for the CommandHandler component */
+
+/* The CommandHandler component doesn't render anything visible,
+   but we'll keep this file for future use if needed */
+
+.command-input-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #00ff00;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 14px;
+  z-index: 9999;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+}
+
+.command-input {
+  display: flex;
+  align-items: center;
+}
+
+.command-prompt {
+  margin-right: 8px;
+  color: #00ff00;
+}
+
+.command-text-input {
+  background: transparent;
+  border: none;
+  color: white;
+  font-family: monospace;
+  font-size: 14px;
+  outline: none;
+  flex-grow: 1;
+}
+
+.command-help {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+.command-message {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #ff9900;
+  font-weight: bold;
+}
+
+.command-cursor {
+  animation: blink 1s infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+} 

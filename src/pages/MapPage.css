@@ -1,0 +1,11 @@
+.map-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-header {
+  padding: 20px;
+  background: white;
+  border-bottom: 1px solid #eee;
+} 

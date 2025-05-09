@@ -1,0 +1,784 @@
+.public-profile-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.public-profile-header {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.public-profile-cover {
+  height: 200px;
+  background: linear-gradient(45deg, #FF69B4, #9B5DE5);
+  position: relative;
+}
+
+.public-cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.public-profile-quick-info {
+  padding: 1rem 2rem 1rem calc(180px + 4rem);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.public-company-logo {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  bottom: auto;
+  top: -75px;
+  left: 24px;
+  border: 4px solid white;
+  z-index: 1;
+}
+
+.public-logo-preview {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.public-logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: white;
+}
+
+.public-logo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #FF69B4, #9B5DE5);
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.public-profile-quick-info h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.public-vendor-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 8px 0;
+}
+
+.public-star-icon {
+  color: #FFD700;
+}
+
+.public-review-count {
+  color: #666;
+  font-size: 14px;
+}
+
+.public-vendor-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.public-category-tag {
+  background: rgba(155, 93, 229, 0.1);
+  color: #9B5DE5;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.public-contact-icons-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.public-contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF69B4, #9B5DE5);
+  color: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.public-contact-icon:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(155, 93, 229, 0.4);
+}
+
+.public-contact-tooltip {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.public-contact-icon:hover .public-contact-tooltip {
+  opacity: 1;
+  visibility: visible;
+  bottom: -35px;
+}
+
+.public-contact-icon svg {
+  font-size: 14px;
+}
+
+.public-contact-icon.social-icon {
+  background: linear-gradient(135deg, #FF69B4, #6B8DFF);
+}
+
+.public-contact-icon.social-icon:hover {
+  background: linear-gradient(135deg, #FF61D8, #5A7DFF);
+}
+
+.public-profile-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 12px;
+}
+
+.public-action-btn {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.public-action-btn.message {
+  background: white;
+  color: #666;
+  border: 1px solid #ddd;
+}
+
+.public-action-btn.message:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.public-action-btn.quote {
+  background: linear-gradient(45deg, #FF69B4, #9B5DE5);
+  color: white;
+}
+
+.public-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.public-profile-nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.public-profile-nav button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  background: none;
+  color: #666;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.public-profile-nav button:hover {
+  color: #FF69B4;
+}
+
+.public-profile-nav button.active {
+  background: linear-gradient(45deg, #FF69B4, #9B5DE5);
+  color: white;
+}
+
+.public-content-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.public-content-section h2 {
+  margin: 0 0 2rem 0;
+  color: #333;
+}
+
+.public-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 2rem;
+}
+
+.public-info-card {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 0;
+}
+
+.public-info-card svg {
+  font-size: 2rem;
+  color: #FF69B4;
+  margin-bottom: 1rem;
+}
+
+.public-info-card h3 {
+  margin: 10px 0;
+}
+
+.public-info-card p {
+  margin: 0;
+  color: #666;
+}
+
+.public-company-description {
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.public-company-description h3 {
+  margin: 0 0 1rem 0;
+  color: #333;
+}
+
+.public-company-description p {
+  margin: 0;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Back button styles */
+.public-back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  background: white;
+  border: none;
+  border-radius: 25px;
+  color: #666;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.public-back-button:hover {
+  transform: translateX(-5px);
+  color: #FF69B4;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.public-back-button svg {
+  font-size: 1.1rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .public-profile-container {
+    padding: 1rem;
+  }
+
+  .public-profile-quick-info {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .public-company-logo {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin: -75px auto 1rem;
+  }
+
+  .public-profile-actions {
+    margin: 1rem 0 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .public-profile-nav {
+    overflow-x: auto;
+    padding: 0.5rem;
+  }
+
+  .public-profile-nav button {
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+  }
+}
+
+/* Services Section */
+.public-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.public-service-card {
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.public-service-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.public-service-card svg {
+  font-size: 2rem;
+  color: #FF69B4;
+  margin-bottom: 1rem;
+}
+
+.public-service-card h3 {
+  margin: 0 0 0.8rem 0;
+  color: white !important;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 0.7rem;
+  background: linear-gradient(45deg, #FF69B4, #9B5DE5);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(155, 93, 229, 0.3);
+}
+
+.public-service-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: auto;
+}
+
+.public-service-details span {
+  display: inline-block;
+  background: linear-gradient(45deg, rgba(255, 105, 180, 0.15), rgba(155, 93, 229, 0.15));
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-weight: 500;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+/* Service images */
+.public-service-image {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.public-service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.public-service-card:hover .public-service-image img {
+  transform: scale(1.05);
+}
+
+.public-service-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  background: #f0f0f0;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.public-capabilities-section {
+  margin-top: 3rem;
+}
+
+.public-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.public-tag {
+  background: #f0f0f0;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Portfolio Section */
+.public-portfolio-content {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.public-portfolio-section {
+  margin-bottom: 3rem;
+}
+
+.public-portfolio-section:last-child {
+  margin-bottom: 0;
+}
+
+.public-portfolio-section h3 {
+  color: #333;
+  margin: 0 0 1rem 0;
+}
+
+.public-section-description {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.public-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.public-gallery-item {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.public-gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.public-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.public-portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.public-portfolio-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.public-portfolio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.public-portfolio-image {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.public-portfolio-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.public-portfolio-info {
+  padding: 1.5rem;
+}
+
+.public-portfolio-info h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.public-portfolio-info p {
+  margin: 0;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Clients Section */
+.public-clients-display-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.public-client-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.public-client-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.public-client-logo {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1rem;
+}
+
+.public-client-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.public-client-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1rem;
+  background: linear-gradient(45deg, #FF69B4, #9B5DE5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+}
+
+.public-client-info h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+/* Reviews Section */
+.public-reviews-overview {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #eee;
+}
+
+.public-rating-summary {
+  text-align: center;
+}
+
+.public-average-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.public-rating-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.public-total-reviews {
+  color: #666;
+  margin: 0;
+}
+
+.public-rating-bars {
+  flex: 1;
+  max-width: 400px;
+}
+
+.public-rating-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.public-stars {
+  width: 60px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.public-bar-container {
+  flex: 1;
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.public-bar {
+  height: 100%;
+  background: linear-gradient(45deg, #FF69B4, #9B5DE5);
+  border-radius: 4px;
+}
+
+.public-count {
+  width: 30px;
+  text-align: right;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.public-reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.public-review-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.public-review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.public-reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.public-reviewer-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #FF69B4, #9B5DE5);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+}
+
+.public-reviewer-info h4 {
+  margin: 0 0 0.25rem;
+  color: #333;
+}
+
+.public-review-rating {
+  display: flex;
+  gap: 2px;
+}
+
+.public-review-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.public-review-text {
+  color: #444;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Mobile responsiveness for additional sections */
+@media (max-width: 768px) {
+  .public-gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .public-portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .public-clients-display-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .public-reviews-overview {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .public-rating-bars {
+    max-width: none;
+  }
+} 

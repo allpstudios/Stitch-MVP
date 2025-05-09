@@ -1,0 +1,167 @@
+.main-nav {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 1rem;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem auto;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link:hover {
+  background: white;
+  color: #FF69B4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link.active {
+  background: white;
+  color: #FF69B4;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styles */
+.header {
+  background: linear-gradient(45deg, #FF69B4, #9B5DE5);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+.title-container {
+  margin-bottom: 2rem;
+}
+
+.title-container h1 {
+  font-size: 3.5rem;
+  color: white;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-weight: 800;
+}
+
+.title-container h2 {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0.5rem 0 0 0;
+  font-weight: 400;
+}
+
+/* Update the resource cards to match vendor card style */
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.article-card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.article-card h3 {
+  color: #FF69B4;
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+}
+
+.article-card p {
+  color: #666;
+  margin: 0 0 15px 0;
+  line-height: 1.5;
+}
+
+.article-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.read-time {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.read-more {
+  color: #9B5DE5;
+  font-weight: 600;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 15px;
+  transition: background-color 0.2s ease;
+}
+
+.read-more:hover {
+  background-color: rgba(155, 93, 229, 0.1);
+}
+
+/* Update category section to match overall design */
+.category-section {
+  margin-bottom: 2rem;
+}
+
+.category-section h2 {
+  color: #FF69B4;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0 20px;
+}
+
+.category-icon {
+  font-size: 1.5rem;
+}
+
+/* Add max-width and center the resources page content */
+.resources-page {
+  max-width: 1400px;  /* Match the main content width */
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Center the category sections */
+.resource-categories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.category-section {
+  width: 100%;
+  max-width: 1400px;
+  margin-bottom: 2rem;
+} 

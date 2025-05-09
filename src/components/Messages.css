@@ -1,0 +1,29 @@
+.conversation-item.unread {
+  background: rgba(255, 105, 180, 0.05);
+  font-weight: 500;
+}
+
+.conversation-item.unread .last-message {
+  color: #333;
+  font-weight: 500;
+}
+
+.conversation-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.unread-count {
+  background: #FF69B4;
+  color: white;
+  border-radius: 50%;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 0 6px;
+} 

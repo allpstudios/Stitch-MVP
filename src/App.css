@@ -1,0 +1,505 @@
+:root {
+  /* Light mode variables */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --border-color: #eeeeee;
+  --gradient-start: #FF69B4;
+  --gradient-end: #9B5DE5;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color-strong: rgba(0, 0, 0, 0.15);
+  --card-bg: white;
+  --input-bg: white;
+  --input-border: rgba(155,93,229,0.3);
+}
+
+/* Dark mode variables */
+[data-theme='dark'] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --border-color: #404040;
+  --gradient-start: #FF69B4;
+  --gradient-end: #9B5DE5;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-color-strong: rgba(0, 0, 0, 0.4);
+  --card-bg: #2d2d2d;
+  --input-bg: #333333;
+  --input-border: rgba(255,255,255,0.2);
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 100px);
+  background-color: var(--bg-primary);
+}
+
+.search-filters {
+  padding: 20px;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.filter-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  background: var(--card-bg);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  color: var(--text-primary);
+}
+
+.filter-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color-strong);
+}
+
+.filter-buttons button.active {
+  background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+  color: white;
+}
+
+.map-and-cards-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.vendor-list {
+  width: 400px;
+  height: 100%;
+  overflow-y: auto;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+}
+
+.map-container {
+  flex: 1;
+  position: relative;
+}
+
+.vendor-cards-section {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-color);
+  background: var(--bg-primary);
+}
+
+.vendor-section-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.vendor-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.map-section {
+  flex: 1;
+  position: relative;
+}
+
+.info-window {
+  padding: 10px;
+  min-width: 200px;
+}
+
+.info-window h3 {
+  margin: 0 0 5px 0;
+  color: var(--text-primary);
+}
+
+.map-error {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: #ff4444;
+  margin: 20px 0;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.results-counter {
+  margin-top: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.results-number {
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.clear-filters {
+  padding: 8px 16px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.clear-filters:hover {
+  background: #e0e0e0;
+}
+
+.header {
+  padding: 1rem 2rem;
+  position: relative;
+  text-align: center;
+}
+
+.title-container {
+  margin-bottom: 1rem;
+}
+
+.main-nav {
+  display: inline-flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0 auto;
+}
+
+.nav-utility {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+}
+
+.stitch-logo {
+  height: 50px; /* Adjust this to match your current logo size */
+  width: auto;
+  margin-bottom: 0.5rem;
+}
+
+/* Update existing styles if needed */
+
+/* Add these new styles */
+.view-toggle-container {
+  width: 100%;
+  background: var(--bg-primary);
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.view-toggle {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--bg-secondary);
+  padding: 0.25rem;
+  border-radius: 30px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  margin: 0 auto;
+  max-width: fit-content;
+}
+
+.toggle-btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.toggle-btn svg {
+  font-size: 1.1rem;
+}
+
+.toggle-btn:hover {
+  color: var(--gradient-start);
+}
+
+.toggle-btn.active {
+  background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+  color: white;
+  box-shadow: 0 2px 8px var(--shadow-color-strong);
+}
+
+.list-view-container {
+  padding: 2rem;
+  background: var(--bg-secondary);
+}
+
+.list-view-container .vendor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Stitch AI Chat Styles */
+.stitch-ai-widget {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+}
+
+.chat-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+  border: none;
+  color: white;
+  box-shadow: 0 4px 12px var(--shadow-color-strong);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  padding: 0;
+}
+
+.chat-button:hover {
+  transform: scale(1.05);
+}
+
+.chat-button svg {
+  font-size: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-panel {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  width: 400px;
+  height: 600px;
+  background: var(--bg-primary);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.chat-header {
+  padding: 1.2rem;
+  background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+  color: white;
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.chat-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.close-chat {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: var(--bg-primary);
+}
+
+.message {
+  max-width: 80%;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.user-message {
+  background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 2px 8px var(--shadow-color-strong);
+}
+
+.ai-message {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+.chat-input {
+  padding: 1rem;
+  background: var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+  width: 100%;
+}
+
+.chat-input form {
+  display: flex;
+  gap: 0.8rem;
+  width: 100%;
+  align-items: center;
+}
+
+.chat-input input {
+  flex: 1;
+  height: 45px;
+  padding: 0 1.2rem;
+  border: 2px solid var(--input-border);
+  border-radius: 25px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s ease;
+  background: var(--input-bg);
+  min-width: 0;
+  color: var(--text-primary);
+}
+
+.chat-input input:focus {
+  border-color: var(--gradient-start);
+  box-shadow: 0 0 0 3px var(--shadow-color-strong);
+}
+
+.chat-input input::placeholder {
+  color: var(--text-secondary);
+}
+
+.chat-input button {
+  width: 45px;
+  height: 45px;
+  padding: 0;
+  background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px var(--shadow-color-strong);
+  flex-shrink: 0;
+}
+
+.chat-input button svg {
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-input button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background: linear-gradient(45deg, #ccc, #999);
+  box-shadow: none;
+}
+
+/* Adjust main content when chat is open */
+.main-content.chat-open {
+  padding-right: 420px; /* 400px panel + 20px gap */
+  transition: padding-right 0.3s ease;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  z-index: 1000;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px var(--shadow-color-strong);
+}
+
+.theme-toggle svg {
+  font-size: 1.2rem;
+}
+
+/* Additional dark mode styles */
+[data-theme='dark'] .vendor-card {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+[data-theme='dark'] .vendor-card h3,
+[data-theme='dark'] .vendor-card p {
+  color: var(--text-primary);
+}
+
+[data-theme='dark'] .map-container {
+  filter: brightness(0.8) contrast(1.2);
+}
+
+.beta-badge {
+  display: none !important;  /* Force hide the badge */
+}
+
+.notification-indicator {
+  display: none !important;  /* Force hide any standalone notification indicators */
+} 
